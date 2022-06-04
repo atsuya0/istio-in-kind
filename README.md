@@ -1,0 +1,15 @@
+- kind
+  - https://kind.sigs.k8s.io/docs/user/quick-start/#installation
+  - kind create cluster --name kind-iptables --config=kind-config.yaml
+- istio
+  - https://asdf-vm.com/
+  - asdf plugin add istioctl
+  - asdf install istioctl 1.12.7
+  - asdf global istioctl 1.12.7
+  - istioctl x precheck
+  - istioctl install -f istio-operator.yaml --set values.global.proxy.enableCoreDump=true --dry-run
+  - istioctl install -f istio-operator.yaml
+  - istioctl verify-install -f istio-operator.yaml
+  - istioctl tag set stable --revision 1-12-7
+- k8s
+  - kubectl apply -k nginx
