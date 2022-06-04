@@ -1,0 +1,23 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  revision: 1-27-7
+  profile: demo
+  components:
+    ingressGateways:
+    - name: istio-ingressgateway
+      enabled: true
+      k8s:
+        nodeSelector:
+          istio: "true"
+        service:
+          type: NodePort
+          ports:
+          - name: http2
+            port: 80
+            targetPort: 8080
+            nodePort: 31039
+    pilot:
+      k8s:
+        nodeSelector:
+          istio: "true"
